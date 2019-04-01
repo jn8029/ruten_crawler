@@ -16,7 +16,7 @@ results = product_crawler.get_crawl_result()
 To install [this verson from PyPI](https://pypi.org/project/ruten_crawler/), type:
 ```
 
-pip install rutencrawler
+pip install ruten_crawler
 
 ```
 
