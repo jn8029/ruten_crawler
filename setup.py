@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="rutencrawler",
-    version="0.0.4",
+    version="0.0.5",
     author="jn8029",
     author_email="warren.y.cheng@gmail.com",
     description="A crawler for product information of sellers on Ruten.",
