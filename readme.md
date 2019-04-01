@@ -27,7 +27,7 @@ To get the newest one from this repo (note that we are in the alpha stage, so th
 
 ```
 
-pip install git+git://github.com/stared/livelossplot.git
+pip install git+git://github.com/jn8029/rutencrawler.git
 
 ```
 ## Overview
