@@ -1,4 +1,4 @@
-from rutencrawler import ProductCrawler
+from ruten_crawler import ProductCrawler
 
 if __name__ == "__main__":
 

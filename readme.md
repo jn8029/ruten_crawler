@@ -7,7 +7,7 @@
 This is a repository that offers a ProductCrawler class to crawl Ruten web pages for the product information in json format.
 
 ```
-from Crawler import ProductCrawler
+from ruten_crawler import ProductCrawler
 product_crawler = ProductCrawler(seller_id = "hambergurs")
 results = product_crawler.get_crawl_result()
 ```
