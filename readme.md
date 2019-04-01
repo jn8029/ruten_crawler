@@ -8,15 +8,12 @@ This is a repository that offers a ProductCrawler class to crawl Ruten web pages
 
 ```
 from Crawler import ProductCrawler
-seller_ruten_id = "SELLER_RUTEN_ID"
-url ="https://class.ruten.com.tw/user/index00.php?s={seller_ruten_id}"
-url = url.format(seller_ruten_id)
-product_crawler = ProductCrawler(url)
+product_crawler = ProductCrawler(seller_id = "hambergurs")
 results = product_crawler.get_crawl_result()
 ```
 
 ## Installation
-To install [this verson from PyPI](https://pypi.org/project/rutencrawler/), type:
+To install [this verson from PyPI](https://pypi.org/project/ruten_crawler/), type:
 ```
 
 pip install rutencrawler
@@ -27,7 +24,7 @@ To get the newest one from this repo (note that we are in the alpha stage, so th
 
 ```
 
-pip install git+git://github.com/jn8029/rutencrawler.git
+pip install git+git://github.com/jn8029/ruten_crawler.git
 
 ```
 ## Overview

@@ -6,9 +6,10 @@ class ProductCrawler:
     headers = {
                 'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
             }
-    def __init__(self, url, sleep_at_each_iteration = 20, sleep_time = 1):
+    def __init__(self, seller_id, sleep_at_each_iteration = 20, sleep_time = 1):
+
         self.products = []
-        self.url = url
+        self.url = "https://class.ruten.com.tw/user/index00.php?s={seller_id}".format(seller_id=seller_id)
         self.threads = []
         self.product_urls = []
         self.sleep_time = sleep_time

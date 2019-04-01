@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="rutencrawler",
+    name="ruten_crawler",
     version="0.0.5",
     author="jn8029",
     author_email="warren.y.cheng@gmail.com",
