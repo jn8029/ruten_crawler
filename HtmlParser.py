@@ -7,6 +7,18 @@ class HtmlParser:
         self._response = response
         self._response.encoding = "utf-8"
         self._parser = BeautifulSoup(self._response.text, "lxml")
+    def get_javascript_context(self, regex):
+        scripts = self._parser.select("script")
+        try:
+            script_with_shipping_detail = [script.text for script in scripts if "RT.context" in script.text][0]
+        except IndexError:
+            error_message = "RT.context cannot be found in the html, data might have been moved by the website developer."
+            raise ValueError(error_message)
+        else:
+
+            regex_matches = re.search(regex, script_with_shipping_detail)
+            search_result = regex_matches.group(0)
+            return search_result
 
 
 
@@ -14,18 +26,27 @@ class ProductListParser(HtmlParser):
     def __init__(self, product_list_response):
         super().__init__(product_list_response)
 
+    def get_max_page(self):
+        return self._get_number_of_products() / self._get_number_per_page() +1
+    def _get_number_of_products(self):
+        regex = '(?<="page":{"total":)(.*)(?=,"perPage)'
+        max_page = self.get_javascript_context(regex)
+        return int(max_page)
+    def _get_number_per_page(self):
+        regex = '(?<="perPage":)(.*)(?=,"current")'
+        number_per_page = self.get_javascript_context(regex)
+        return int(number_per_page)
+
 
     def get_product_list(self):
         """
-        Return a dict of product_title_to_url,
-        key: product title
-        value: product url
+        Return a list of product_url
         """
-        product_title_to_url = {}
+        product_urls = []
         product_a_tags = self._parser.select(".item-info h3 a")
         for product_a_tag in product_a_tags:
-            product_title_to_url[product_a_tag.text] = product_a_tag.get("href")
-        return product_title_to_url
+            product_urls.append(product_a_tag.get("href"))
+        return product_urls
 
 
 class ProductPageParser(HtmlParser):
@@ -38,8 +59,9 @@ class ProductPageParser(HtmlParser):
                     "images":self._get_images(),
                     "shipping_fees":self._get_shipping_fees()
                     }
+        return product
     def _get_title(self):
-        return None
+        return self._parser.select_one("meta[itemprop='description']").get("content")
     def _get_images(self):
         """
         Return a list of image urls
@@ -71,8 +93,7 @@ class ProductPageParser(HtmlParser):
             raise ValueError(error_message)
         else:
             shipment_info_regex = '(?<=shipment":)(.*)(?=,"payment)'
-            regex_matches = re.search(shipment_info_regex, script_with_shipping_detail)
-            search_result = regex_matches.group(0)
+            search_result = self.get_javascript_context(shipment_info_regex)
             shipment_list = json.loads(search_result)
             shipment_dict = {shipping_method['name']:shipping_method['cost'] for shipping_method in shipment_list}
             return shipment_dict
