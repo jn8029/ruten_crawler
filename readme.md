@@ -9,7 +9,7 @@ This is a repository that offers a ProductCrawler class to crawl Ruten web pages
 
 ```
 from ruten_crawler import ProductCrawler
-product_crawler = ProductCrawler(seller_id = "hambergurs")
+product_crawler = ProductCrawler(seller_id = "YOUT_TARGET_SELLER_ID")
 results = product_crawler.get_crawl_result()
 ```
 
