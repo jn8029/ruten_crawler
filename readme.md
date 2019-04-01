@@ -1,7 +1,8 @@
 # Ruten Seller Product Parser
-![PyPI version](https://img.shields.io/pypi/pyversions/ruten_crawler.svg)
-![PyPI license](https://img.shields.io/pypi/l/ruten_crawler.svg)
-
+![PyPI version](https://img.shields.io/pypi/pyversions/ruten-crawler.svg)
+![PyPI license](https://img.shields.io/pypi/l/ruten-crawler.svg)
+![Package Version](https://img.shields.io/pypi/v/ruten-crawler.svg)
+![Github Last Commit](https://img.shields.io/github/last-commit/jn8029/ruten_crawler.svg)
 
 
 This is a repository that offers a ProductCrawler class to crawl Ruten web pages for the product information in json format.
