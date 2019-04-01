@@ -1,6 +1,6 @@
 # Ruten Seller Product Parser
-![PyPI version](https://img.shields.io/pypi/pyversions/rutencrawler.svg)
-![PyPI license](https://img.shields.io/pypi/l/rutencrawler.svg)
+![PyPI version](https://img.shields.io/pypi/pyversions/ruten_crawler.svg)
+![PyPI license](https://img.shields.io/pypi/l/ruten_crawler.svg)
 
 
 
