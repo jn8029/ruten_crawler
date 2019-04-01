@@ -46,13 +46,13 @@ class ProductCrawler:
             thread.start()
             self.threads.append(thread)
             page_number+=1
-            if page_number%30 == 0:
+            if page_number%20 == 0:
                 time.sleep(1)
         for thread in self.threads:
             thread.join()
         self.threads = []
         return self.product_urls
-        
+
     def get_crawl_result(self):
         product_urls = self.get_product_urls()
         for index, product_url in enumerate(product_urls):
