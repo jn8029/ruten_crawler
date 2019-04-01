@@ -6,7 +6,7 @@ class HtmlParser:
     def __init__(self, response):
         self._response = response
         self._response.encoding = "utf-8"
-        self._parser = BeautifulSoup(self._response.text, "lxml")
+        self._parser = BeautifulSoup(self._response.text, "html.parser")
     def get_javascript_context(self, regex):
         scripts = self._parser.select("script")
         try:

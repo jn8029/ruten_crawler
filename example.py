@@ -1,4 +1,4 @@
-from Crawler import ProductCrawler
+from rutencrawler import ProductCrawler
 
 if __name__ == "__main__":
     url ="https://class.ruten.com.tw/user/index00.php?s=hambergurs"

@@ -1,17 +1,18 @@
 import requests
-from HtmlParser import ProductListParser, ProductPageParser
+from .HtmlParser import ProductListParser, ProductPageParser
 import threading
 import time
 class ProductCrawler:
     headers = {
                 'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
             }
-    def __init__(self, url):
+    def __init__(self, url, sleep_at_each_iteration = 20, sleep_time = 1):
         self.products = []
         self.url = url
         self.threads = []
         self.product_urls = []
-
+        self.sleep_time = sleep_time
+        self.sleep_at_each_iteration = sleep_at_each_iteration
     def _crawl_product_in_thread(self, url):
         success = False
         fail = 0
@@ -23,7 +24,7 @@ class ProductCrawler:
             except Exception:
                 fail += 1
                 print("Fail to Crawl with fail={}, url={}".format(fail,url.split("?")[-1]))
-                time.sleep(5)
+                time.sleep(self.sleep_time)
             else:
                 product_page_parser = ProductPageParser(response)
                 product = product_page_parser.get_product()
@@ -46,8 +47,8 @@ class ProductCrawler:
             thread.start()
             self.threads.append(thread)
             page_number+=1
-            if page_number%20 == 0:
-                time.sleep(1)
+            if page_number%self.sleep_at_each_iteration == 0:
+                time.sleep(self.sleep_time)
         for thread in self.threads:
             thread.join()
         self.threads = []
@@ -60,8 +61,8 @@ class ProductCrawler:
             thread = threading.Thread(target = self._crawl_product_in_thread,args=(product_url,))
             thread.start()
             self.threads.append(thread)
-            if index%20 ==0:
-                time.sleep(1)
+            if index%self.sleep_at_each_iteration ==0:
+                time.sleep(self.sleep_time)
         for thread in self.threads:
             thread.join()
         return self.products
