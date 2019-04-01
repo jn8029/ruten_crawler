@@ -12,11 +12,7 @@ class ProductCrawler:
     def _crawl_in_thread(self, url, title):
         response = requests.get(url, headers=self.headers)
         product_page_parser = ProductPageParser(response)
-        product = {
-                    "title":title,
-                    "images":product_page_parser.get_images(),
-                    "shipping_fees":product_page_parser.get_shipping_fees()
-                    }
+        product = product_page_parser.get_product()
         self.products.append(product)
 
     def get_crawl_result(self, pages):

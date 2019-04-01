@@ -13,7 +13,7 @@ class HtmlParser:
 class ProductListParser(HtmlParser):
     def __init__(self, product_list_response):
         super().__init__(product_list_response)
-        
+
 
     def get_product_list(self):
         """
@@ -32,7 +32,15 @@ class ProductPageParser(HtmlParser):
     def __init__(self, product_page_response):
         super().__init__(product_page_response)
 
-    def get_images(self):
+    def get_product(self):
+        product = {
+                    "title":self._get_title(),
+                    "images":self._get_images(),
+                    "shipping_fees":self._get_shipping_fees()
+                    }
+    def _get_title(self):
+        return None
+    def _get_images(self):
         """
         Return a list of image urls
         """
@@ -40,7 +48,7 @@ class ProductPageParser(HtmlParser):
         image_links = [image_tag.get("src") for image_tag in image_tags]
         return image_links
 
-    def get_shipping_fees(self):
+    def _get_shipping_fees(self):
         """
         Return a dict of shipment_dict
         key: shipment type
